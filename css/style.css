@@ -273,8 +273,16 @@ a {
 }
 
 .language-switcher button:hover,
-.language-switcher button.is-active {
+.language-switcher button.is-active,
+.language-switcher a:hover,
+.language-switcher a.is-active {
     color: var(--color-muted-gold);
+}
+
+.language-switcher a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.25s ease;
 }
 
 /* Section Styling */

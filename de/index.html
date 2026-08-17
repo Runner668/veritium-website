@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>veritium | Menschenähnliche künstliche Intelligenz gestalten</title>
+    <meta name="description" content="Wir entwickeln Schlussfolgerungen jenseits statistischer Modelle neu.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+</head>
+<body>
+    <div id="canvas-container"></div>
+
+    <nav class="nav">
+        <a href="./" class="nav-brand">
+            <img class="nav-logo-img" src="../assets/logo.svg" alt="veritium Logo">
+            <span class="nav-logo">Veritium</span>
+        </a>
+        <button class="mobile-menu-btn" aria-label="Navigation öffnen">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+        <div class="nav-links">
+            <div class="language-switcher" aria-label="Sprache">
+                <a href="./" class="is-active" aria-current="page">DE</a>
+                <span aria-hidden="true">/</span>
+                <a href="../en/">EN</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section id="hero" class="section hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title">Gemeinsam<br>menschenähnliche<br>künstliche Intelligenz gestalten.</h1>
+                    <p class="hero-subtitle">
+                        <span class="hero-subtitle-text">
+                            Wir entwickeln Schlussfolgerungen jenseits statistischer Modelle neu.
+                            <svg class="brush-highlight" viewBox="0 0 400 30" preserveAspectRatio="none" aria-hidden="true">
+                                <defs>
+                                    <mask id="brush-mask">
+                                        <path class="mask-path" d="M0,15 L400,15" stroke="white" stroke-width="28" fill="none" />
+                                    </mask>
+                                </defs>
+                                <path class="brush-stroke" d="M5,12 C40,8 150,8 220,10 C290,12 360,8 395,12 C398,15 390,20 380,22 C300,28 100,25 20,20 C10,18 0,15 5,12 Z" fill="#C6A95E" opacity="0.85" mask="url(#brush-mask)" />
+                            </svg>
+                        </span>
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <span class="copyright">© 2026 veritium GmbH. Alle Rechte vorbehalten.</span>
+            <div class="footer-links">
+                <a href="legal.html">Impressum</a>
+                <a href="data-protection.html">Datenschutz</a>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module" src="../js/main.js"></script>
+</body>
+</html>

@@ -1,10 +1,7 @@
 import { DemoScene } from './demoScene.js';
 import { initAnimations } from './animations.js';
-import { initI18n } from './i18n.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-    initI18n();
-
     const mobileButton = document.querySelector('.mobile-menu-btn');
     const navLinks = document.querySelector('.nav-links');
 
