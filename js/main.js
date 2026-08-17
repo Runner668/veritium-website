@@ -1,6 +1,7 @@
 
 import { DemoScene } from './demoScene.js';
 import { initAnimations } from './animations.js';
+import { initI18n } from './i18n.js';
 
 /**
  * Main Entry Point
@@ -8,6 +9,7 @@ import { initAnimations } from './animations.js';
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+    initI18n();
     // 1. Initialize Smooth Scroll (Lenis)
     // Adjusted for faster response, less "lag" feeling
     const lenis = new Lenis({

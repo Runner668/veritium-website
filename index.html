@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>veritium | Shaping Human-like Artificial Intelligence</title>
-    <meta name="description" content="Rebuilding reasoning beyond statistical models. A dual-layer intelligence architecture for high-responsibility domains.">
+    <title data-i18n="meta.title">veritium | Shaping Human-like Artificial Intelligence</title>
+    <meta name="description" content="Rebuilding reasoning beyond statistical models. A dual-layer intelligence architecture for high-responsibility domains." data-i18n-attr="content:meta.description">
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -31,29 +31,35 @@
             <img class="nav-logo-img" src="assets/logo.svg" alt="veritium logo">
             <span class="nav-logo">Veritium</span>
         </a>
-        <button class="mobile-menu-btn" aria-label="Toggle navigation">
+        <button class="mobile-menu-btn" aria-label="Toggle navigation" data-i18n-attr="aria-label:nav.toggle">
             <span class="bar"></span>
             <span class="bar"></span>
             <span class="bar"></span>
         </button>
         <div class="nav-links">
             <div class="nav-item dropdown">
-                <span class="nav-link dropdown-trigger">Technology</span>
+                <span class="nav-link dropdown-trigger" data-i18n="nav.technology">Technology</span>
                 <div class="dropdown-menu">
-                    <a href="#paradigm">Paradigm</a>
-                    <a href="#architecture">Architecture</a>
+                    <a href="#paradigm" data-i18n="nav.paradigm">Paradigm</a>
+                    <a href="#architecture" data-i18n="nav.architecture">Architecture</a>
                 </div>
             </div>
-            <a href="#industrial">Industrial</a>
+            <a href="#industrial" data-i18n="nav.industrial">Industrial</a>
             <div class="nav-item dropdown">
-                <span class="nav-link dropdown-trigger">Science</span>
+                <span class="nav-link dropdown-trigger" data-i18n="nav.science">Science</span>
                 <div class="dropdown-menu">
-                    <a href="#science">Scientific Foundation</a>
-                    <a href="#conferences">Conferences & Workshops</a>
+                    <a href="#science" data-i18n="nav.foundation">Scientific Foundation</a>
+                    <a href="#conferences" data-i18n="nav.conferences">Conferences & Workshops</a>
                 </div>
             </div>
-            <a href="#founder">Founder</a>
-            <a href="#contact" class="btn-nav">Collaborate</a>
+            <a href="#founder" data-i18n="nav.founder">Founder</a>
+            <a href="#contact" class="btn-nav" data-i18n="nav.collaborate">Collaborate</a>
+            <div class="language-switcher" aria-label="Language">
+                <span class="language-label" data-i18n="language.label">Language</span>
+                <button type="button" data-lang="de" aria-pressed="true">DE</button>
+                <span aria-hidden="true">/</span>
+                <button type="button" data-lang="en" aria-pressed="false">EN</button>
+            </div>
         </div>
     </nav>
 
@@ -63,10 +69,10 @@
         <section id="hero" class="section hero">
             <div class="container">
                 <div class="hero-content">
-                    <h1 class="hero-title">Shaping human-like<br>artificial intelligence<br>together.</h1>
+                    <h1 class="hero-title" data-i18n-html="hero.title">Shaping human-like<br>artificial intelligence<br>together.</h1>
                     <p class="hero-subtitle">
                         <span class="hero-subtitle-text">
-                            Rebuilding reasoning beyond statistical models.
+                            <span data-i18n="hero.subtitle">Rebuilding reasoning beyond statistical models.</span>
                             <svg class="brush-highlight" viewBox="0 0 400 30" preserveAspectRatio="none">
                                 <defs>
                                     <mask id="brush-mask">
@@ -78,12 +84,12 @@
                         </span>
                     </p>
                     <div class="hero-cta">
-                        <a href="#science" class="btn btn-secondary">Explore our Science</a>
+                        <a href="#science" class="btn btn-secondary" data-i18n="hero.cta">Explore our Science</a>
                     </div>
                 </div>
                 <!-- Scroll Indicator -->
                 <div class="scroll-indicator">
-                    <span class="scroll-text">Scroll</span>
+                    <span class="scroll-text" data-i18n="hero.scroll">Scroll</span>
                     <span class="scroll-line"></span>
                 </div>
             </div>
@@ -93,9 +99,9 @@
             <div class="container">
                 <div class="values-content">
                     <div class="values-tags">
-                        <span class="values-word values-word--explainable">Explainable</span>
-                        <span class="values-word values-word--deterministic">Deterministic</span>
-                        <span class="values-word values-word--geometric">Geometric</span>
+                        <span class="values-word values-word--explainable" data-i18n="values.explainable">Explainable</span>
+                        <span class="values-word values-word--deterministic" data-i18n="values.deterministic">Deterministic</span>
+                        <span class="values-word values-word--geometric" data-i18n="values.geometric">Geometric</span>
                     </div>
                 </div>
             </div>
@@ -105,13 +111,13 @@
         <section id="paradigm" class="section paradigm">
             <div class="container">
                 <div class="paradigm-header">
-                    <h2 class="section-title">The Next Shift in<br>Artificial Intelligence</h2>
+                    <h2 class="section-title" data-i18n-html="paradigm.title">The Next Shift in<br>Artificial Intelligence</h2>
                 </div>
                 <div class="paradigm-grid">
                     <div class="paradigm-card left">
-                        <h3>Statistical AI</h3>
-                        <p>Probabilistic token prediction. Excellent at fluency, prone to hallucination. Limited reasoning depth.</p>
-                        <div class="status-indicator error">Uncertain</div>
+                        <h3 data-i18n="paradigm.statistical">Statistical AI</h3>
+                        <p data-i18n="paradigm.statisticalCopy">Probabilistic token prediction. Excellent at fluency, prone to hallucination. Limited reasoning depth.</p>
+                        <div class="status-indicator error" data-i18n="paradigm.uncertain">Uncertain</div>
                     </div>
                     <div class="paradigm-center">
                         <div class="divider-line"></div>
@@ -119,9 +125,9 @@
                         <div class="divider-line"></div>
                     </div>
                     <div class="paradigm-card right">
-                        <h3>Structured Reasoning</h3>
-                        <p>Geometric, logic-based validation. Deterministic outputs grounded in verified ontology. Zero hallucination.</p>
-                        <div class="status-indicator success">Verified</div>
+                        <h3 data-i18n="paradigm.structured">Structured Reasoning</h3>
+                        <p data-i18n="paradigm.structuredCopy">Geometric, logic-based validation. Deterministic outputs grounded in verified ontology.</p>
+                        <div class="status-indicator success" data-i18n="paradigm.verified">Verified</div>
                     </div>
                 </div>
             </div>
@@ -131,22 +137,22 @@
         <section id="architecture" class="section architecture">
             <div class="container">
                 <div class="architecture-content">
-                    <h2 class="section-title">A Dual-Layer<br>Intelligence Architecture</h2>
+                    <h2 class="section-title" data-i18n-html="architecture.title">A Dual-Layer<br>Intelligence Architecture</h2>
                     <div class="architecture-diagram" id="arch-diagram">
                         <!-- SVG Diagram will be injected here or animated via CSS/JS -->
                         <div class="diagram-layer system-1">
-                            <span class="layer-label">System 1 (LLM)</span>
-                            <div class="layer-desc">Rapid Hypothesis Generation</div>
+                            <span class="layer-label" data-i18n="architecture.system1">System 1 (LLM)</span>
+                            <div class="layer-desc" data-i18n="architecture.hypothesis">Rapid Hypothesis Generation</div>
                         </div>
                         <div class="diagram-arrow arrow-1">↓</div>
                         <div class="diagram-layer knowledge">
-                            <span class="layer-label">Knowledge Graph</span>
-                            <div class="layer-desc">Ontology & Constraints</div>
+                            <span class="layer-label" data-i18n="architecture.knowledge">Knowledge Graph</span>
+                            <div class="layer-desc" data-i18n="architecture.constraints">Ontology & Constraints</div>
                         </div>
                         <div class="diagram-arrow arrow-2">↓</div>
                         <div class="diagram-layer system-2">
-                            <span class="layer-label">System 2 (Geometry)</span>
-                            <div class="layer-desc">Logical Validation & Reasoning</div>
+                            <span class="layer-label" data-i18n="architecture.system2">System 2 (Geometry)</span>
+                            <div class="layer-desc" data-i18n="architecture.validation">Logical Validation & Reasoning</div>
                         </div>
                     </div>
                 </div>
@@ -156,29 +162,29 @@
         <!-- Industrial Relevance Section -->
         <section id="industrial" class="section industrial">
             <div class="container">
-                <h2 class="section-title">Built for<br>High-Responsibility Domains</h2>
+                <h2 class="section-title" data-i18n-html="industrial.title">Built for<br>High-Responsibility Domains</h2>
                 <div class="features-grid">
                     <div class="feature-item">
                         <span class="feature-icon">◉</span>
-                        <h3>Auditability</h3>
-                        <p>Full traceability of every decision path.</p>
+                        <h3 data-i18n="industrial.auditability">Auditability</h3>
+                        <p data-i18n="industrial.auditabilityCopy">Full traceability of every decision path.</p>
                     </div>
                     <div class="feature-item">
                         <span class="feature-icon">◎</span>
-                        <h3>Reliability</h3>
-                        <p>Consistent outputs for safety-critical tasks.</p>
+                        <h3 data-i18n="industrial.reliability">Reliability</h3>
+                        <p data-i18n="industrial.reliabilityCopy">Consistent outputs for safety-critical tasks.</p>
                     </div>
                     <div class="feature-item">
                         <span class="feature-icon">◈</span>
-                        <h3>Integration</h3>
-                        <p>Seamlessly connects with enterprise data.</p>
+                        <h3 data-i18n="industrial.integration">Integration</h3>
+                        <p data-i18n="industrial.integrationCopy">Seamlessly connects with enterprise data.</p>
                     </div>
                 </div>
                 <div class="industries-list">
-                    <span>Life Sciences</span>
-                    <span>Finance</span>
-                    <span>Legal</span>
-                    <span>Aerospace</span>
+                    <span data-i18n="industrial.lifeSciences">Life Sciences</span>
+                    <span data-i18n="industrial.finance">Finance</span>
+                    <span data-i18n="industrial.legal">Legal</span>
+                    <span data-i18n="industrial.aerospace">Aerospace</span>
                 </div>
             </div>
         </section>
@@ -186,7 +192,7 @@
         <!-- Scientific Foundation Section -->
         <section id="science" class="section science">
             <div class="container">
-                <h2 class="section-title">Scientific Foundation</h2>
+                <h2 class="section-title" data-i18n="science.title">Scientific Foundation</h2>
                 <div class="papers-grid">
                     <div class="paper-card">
                         <div class="paper-tag">Whitepaper</div>
@@ -249,7 +255,7 @@
         <!-- Conferences Section -->
         <section id="conferences" class="section science">
             <div class="container">
-                <h2 class="section-title">Conferences & Workshops</h2>
+                <h2 class="section-title" data-i18n="conferences.title">Conferences & Workshops</h2>
                 <div class="papers-grid conferences-grid">
                     <div class="paper-card">
                         <div class="paper-tag">Workshop • July 2026</div>
@@ -307,10 +313,8 @@
                                 <img src="images/dr-tiansi-dong.jpg" alt="Dr. Tiansi Dong" class="founder-img">
                             </div>
                             <div class="founder-text">
-                                <blockquote>
-                                    "Sphere Neural Networks bring back symbolic rigour to AI by grounding neural reasoning in set-theoretic semantics rather than vector approximations."
-                                </blockquote>
-                                <cite>— Dr. Tiansi Dong, President & Co-Founder</cite>
+                                <blockquote data-i18n="founder.dongQuote">“Sphere Neural Networks bring back symbolic rigour to AI by grounding neural reasoning in set-theoretic semantics rather than vector approximations.”</blockquote>
+                                <cite data-i18n="founder.dongRole">— Dr. Tiansi Dong, President & Co-Founder</cite>
                             </div>
                         </div>
                     </div>
@@ -320,10 +324,8 @@
                                 <img src="images/feng-lu.jpg" alt="Feng Lu" class="founder-img">
                             </div>
                             <div class="founder-text">
-                                <blockquote>
-                                    "We are redefining neural reasoning. Sphere Neural Networks move AI beyond statistical prediction toward rigorous, logically grounded intelligence."
-                                </blockquote>
-                                <cite>— Feng Lu, CEO & Co-Founder</cite>
+                                <blockquote data-i18n="founder.luQuote">“We are redefining neural reasoning. Sphere Neural Networks move AI beyond statistical prediction toward rigorous, logically grounded intelligence.”</blockquote>
+                                <cite data-i18n="founder.luRole">— Feng Lu, CEO & Co-Founder</cite>
                             </div>
                         </div>
                     </div>
@@ -338,21 +340,21 @@
         <!-- Contact Section -->
         <section id="contact" class="section contact">
             <div class="container">
-                <h2 class="section-title">Collaborate with us</h2>
+                <h2 class="section-title" data-i18n="contact.title">Collaborate with us</h2>
                 <div class="contact-grid">
                     <div class="contact-col">
-                        <h3>Enterprise</h3>
-                        <p>Deploy Veritium in your organization.</p>
+                        <h3 data-i18n="contact.enterprise">Enterprise</h3>
+                        <p data-i18n="contact.enterpriseCopy">Deploy Veritium in your organization.</p>
                         <a href="mailto:enterprise@veritium.eu" class="link-hover">enterprise@veritium.eu</a>
                     </div>
                     <div class="contact-col">
-                        <h3>Research</h3>
-                        <p>Join our scientific mission.</p>
+                        <h3 data-i18n="contact.research">Research</h3>
+                        <p data-i18n="contact.researchCopy">Join our scientific mission.</p>
                         <a href="mailto:research@veritium.eu" class="link-hover">research@veritium.eu</a>
                     </div>
                     <div class="contact-col">
-                        <h3>Investors</h3>
-                        <p>Shape the future of reasoning.</p>
+                        <h3 data-i18n="contact.investors">Investors</h3>
+                        <p data-i18n="contact.investorsCopy">Shape the future of reasoning.</p>
                         <a href="mailto:invest@veritium.eu" class="link-hover">invest@veritium.eu</a>
                     </div>
                 </div>
@@ -361,60 +363,13 @@
     </main>
     <footer class="footer">
         <div class="footer-content">
-            <span class="copyright">&copy; 2026 veritium GmbH. All rights reserved.</span>
+            <span class="copyright" data-i18n="footer.rights">&copy; 2026 veritium GmbH. All rights reserved.</span>
             <div class="footer-links">
-                <a href="#" class="legal-trigger" data-modal="legal-modal">Legal</a>
-                <a href="#" class="legal-trigger" data-modal="privacy-modal">Data Protection</a>
+                <a href="legal.html" data-i18n="footer.legal">Legal</a>
+                <a href="data-protection.html" data-i18n="footer.privacy">Data Protection</a>
             </div>
         </div>
     </footer>
-
-    <!-- Modals -->
-    <div id="legal-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal">&times;</span>
-            <h2>Legal</h2>
-            <div class="modal-body">
-                <p><strong>Veritium GmbH</strong><br>
-                Nussbaumweg 10<br>
-                70437 Stuttgart<br>
-                Germany</p>
-                <br>
-                <p><strong>Represented by:</strong><br>
-                Dr. Tiansi Dong, President & Co-Founder<br>
-                Feng Lu, CEO, Co-Founder
-                </p>
-                <br>
-                <p><strong>Contact:</strong><br>
-                Email: info@veritium.eu<br>
-                Phone: +49 (0) 176 75194466</p>
-                <br>
-                <p><strong>Register Entry:</strong><br>
-                Amtsgericht Stuttgart<br>
-                HRB 797177</p>
-                <br>
-                <p><strong>VAT ID:</strong> DE457355600</p>
-            </div>
-        </div>
-    </div>
-
-    <div id="privacy-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal">&times;</span>
-            <h2>Data Protection Declaration</h2>
-            <div class="modal-body">
-                <h3>1. General Information</h3>
-                <p>The following notes provide a simple overview of what happens to your personal data when you visit this website. Personal data is all data with which you can be personally identified.</p>
-                <br>
-                <h3>2. Data Collection on our Website</h3>
-                <p><strong>Who is responsible for data collection on this website?</strong><br>
-                The data processing on this website is carried out by the website operator. You can find their contact details in the Legal Notice of this website.</p>
-                <br>
-                <h3>3. Analytics and Third-Party Tools</h3>
-                <p>When visiting this website, your surfing behavior can be statistically evaluated. This is done primarily with so-called analysis programs.</p>
-            </div>
-        </div>
-    </div>
 
     <!-- Back to Top Button -->
     <button id="back-to-top" class="back-to-top" aria-label="Back to Top">
