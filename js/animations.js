@@ -39,4 +39,24 @@ export function initAnimations(threeScene, options = {}) {
             duration: 2.5,
             ease: 'power4.out'
         }, 0);
+
+    // Keep the particle field responsive to page scrolling. This deliberately
+    // uses the document's actual scroll range, so it also works if more
+    // homepage sections are added later without requiring hidden triggers.
+    let scrollFramePending = false;
+    const updateScrollState = () => {
+        scrollFramePending = false;
+        const scrollRange = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+        const progress = scrollRange > 0 ? window.scrollY / scrollRange : 0;
+        if (threeScene.setMorphProgress) threeScene.setMorphProgress(progress);
+    };
+    const requestScrollStateUpdate = () => {
+        if (scrollFramePending) return;
+        scrollFramePending = true;
+        window.requestAnimationFrame(updateScrollState);
+    };
+
+    window.addEventListener('scroll', requestScrollStateUpdate, { passive: true });
+    window.addEventListener('resize', requestScrollStateUpdate, { passive: true });
+    updateScrollState();
 }
