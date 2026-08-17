@@ -310,6 +310,16 @@ a {
     z-index: 0;
 }
 
+.hero-cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.hero-cta .btn {
+    margin-right: 0;
+}
+
 .brush-highlight {
     position: absolute;
     top: 62%;

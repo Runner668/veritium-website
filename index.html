@@ -5,27 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title data-i18n="meta.title">veritium | Shaping Human-like Artificial Intelligence</title>
     <meta name="description" content="Rebuilding reasoning beyond statistical models. A dual-layer intelligence architecture for high-responsibility domains." data-i18n-attr="content:meta.description">
-    
-    <!-- Fonts -->
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-    
-    <!-- Styles -->
     <link rel="stylesheet" href="css/style.css">
-    
-    <!-- Libraries -->
-    <!-- Removed global Three.js script as it is imported as a module in js/threeScene.js -->
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
 </head>
 <body>
-
-    <!-- Canvas Container -->
     <div id="canvas-container"></div>
 
-    <!-- Navigation -->
     <nav class="nav">
         <a href="#" class="nav-brand">
             <img class="nav-logo-img" src="assets/logo.svg" alt="veritium logo">
@@ -37,23 +27,8 @@
             <span class="bar"></span>
         </button>
         <div class="nav-links">
-            <div class="nav-item dropdown">
-                <span class="nav-link dropdown-trigger" data-i18n="nav.technology">Technology</span>
-                <div class="dropdown-menu">
-                    <a href="#paradigm" data-i18n="nav.paradigm">Paradigm</a>
-                    <a href="#architecture" data-i18n="nav.architecture">Architecture</a>
-                </div>
-            </div>
-            <a href="#industrial" data-i18n="nav.industrial">Industrial</a>
-            <div class="nav-item dropdown">
-                <span class="nav-link dropdown-trigger" data-i18n="nav.science">Science</span>
-                <div class="dropdown-menu">
-                    <a href="#science" data-i18n="nav.foundation">Scientific Foundation</a>
-                    <a href="#conferences" data-i18n="nav.conferences">Conferences & Workshops</a>
-                </div>
-            </div>
-            <a href="#founder" data-i18n="nav.founder">Founder</a>
-            <a href="#contact" class="btn-nav" data-i18n="nav.collaborate">Collaborate</a>
+            <a href="legal.html" data-i18n="footer.legal">Legal</a>
+            <a href="data-protection.html" data-i18n="footer.privacy">Data Protection</a>
             <div class="language-switcher" aria-label="Language">
                 <span class="language-label" data-i18n="language.label">Language</span>
                 <button type="button" data-lang="de" aria-pressed="true">DE</button>
@@ -63,9 +38,7 @@
         </div>
     </nav>
 
-    <!-- Main Content -->
     <main>
-        <!-- Hero Section -->
         <section id="hero" class="section hero">
             <div class="container">
                 <div class="hero-content">
@@ -73,7 +46,7 @@
                     <p class="hero-subtitle">
                         <span class="hero-subtitle-text">
                             <span data-i18n="hero.subtitle">Rebuilding reasoning beyond statistical models.</span>
-                            <svg class="brush-highlight" viewBox="0 0 400 30" preserveAspectRatio="none">
+                            <svg class="brush-highlight" viewBox="0 0 400 30" preserveAspectRatio="none" aria-hidden="true">
                                 <defs>
                                     <mask id="brush-mask">
                                         <path class="mask-path" d="M0,15 L400,15" stroke="white" stroke-width="28" fill="none" />
@@ -84,283 +57,14 @@
                         </span>
                     </p>
                     <div class="hero-cta">
-                        <a href="#science" class="btn btn-secondary" data-i18n="hero.cta">Explore our Science</a>
-                    </div>
-                </div>
-                <!-- Scroll Indicator -->
-                <div class="scroll-indicator">
-                    <span class="scroll-text" data-i18n="hero.scroll">Scroll</span>
-                    <span class="scroll-line"></span>
-                </div>
-            </div>
-        </section>
-
-        <section id="values" class="section values">
-            <div class="container">
-                <div class="values-content">
-                    <div class="values-tags">
-                        <span class="values-word values-word--explainable" data-i18n="values.explainable">Explainable</span>
-                        <span class="values-word values-word--deterministic" data-i18n="values.deterministic">Deterministic</span>
-                        <span class="values-word values-word--geometric" data-i18n="values.geometric">Geometric</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Paradigm Shift Section -->
-        <section id="paradigm" class="section paradigm">
-            <div class="container">
-                <div class="paradigm-header">
-                    <h2 class="section-title" data-i18n-html="paradigm.title">The Next Shift in<br>Artificial Intelligence</h2>
-                </div>
-                <div class="paradigm-grid">
-                    <div class="paradigm-card left">
-                        <h3 data-i18n="paradigm.statistical">Statistical AI</h3>
-                        <p data-i18n="paradigm.statisticalCopy">Probabilistic token prediction. Excellent at fluency, prone to hallucination. Limited reasoning depth.</p>
-                        <div class="status-indicator error" data-i18n="paradigm.uncertain">Uncertain</div>
-                    </div>
-                    <div class="paradigm-center">
-                        <div class="divider-line"></div>
-                        <span class="vs-badge">VS</span>
-                        <div class="divider-line"></div>
-                    </div>
-                    <div class="paradigm-card right">
-                        <h3 data-i18n="paradigm.structured">Structured Reasoning</h3>
-                        <p data-i18n="paradigm.structuredCopy">Geometric, logic-based validation. Deterministic outputs grounded in verified ontology.</p>
-                        <div class="status-indicator success" data-i18n="paradigm.verified">Verified</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Architecture Section -->
-        <section id="architecture" class="section architecture">
-            <div class="container">
-                <div class="architecture-content">
-                    <h2 class="section-title" data-i18n-html="architecture.title">A Dual-Layer<br>Intelligence Architecture</h2>
-                    <div class="architecture-diagram" id="arch-diagram">
-                        <!-- SVG Diagram will be injected here or animated via CSS/JS -->
-                        <div class="diagram-layer system-1">
-                            <span class="layer-label" data-i18n="architecture.system1">System 1 (LLM)</span>
-                            <div class="layer-desc" data-i18n="architecture.hypothesis">Rapid Hypothesis Generation</div>
-                        </div>
-                        <div class="diagram-arrow arrow-1">↓</div>
-                        <div class="diagram-layer knowledge">
-                            <span class="layer-label" data-i18n="architecture.knowledge">Knowledge Graph</span>
-                            <div class="layer-desc" data-i18n="architecture.constraints">Ontology & Constraints</div>
-                        </div>
-                        <div class="diagram-arrow arrow-2">↓</div>
-                        <div class="diagram-layer system-2">
-                            <span class="layer-label" data-i18n="architecture.system2">System 2 (Geometry)</span>
-                            <div class="layer-desc" data-i18n="architecture.validation">Logical Validation & Reasoning</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Industrial Relevance Section -->
-        <section id="industrial" class="section industrial">
-            <div class="container">
-                <h2 class="section-title" data-i18n-html="industrial.title">Built for<br>High-Responsibility Domains</h2>
-                <div class="features-grid">
-                    <div class="feature-item">
-                        <span class="feature-icon">◉</span>
-                        <h3 data-i18n="industrial.auditability">Auditability</h3>
-                        <p data-i18n="industrial.auditabilityCopy">Full traceability of every decision path.</p>
-                    </div>
-                    <div class="feature-item">
-                        <span class="feature-icon">◎</span>
-                        <h3 data-i18n="industrial.reliability">Reliability</h3>
-                        <p data-i18n="industrial.reliabilityCopy">Consistent outputs for safety-critical tasks.</p>
-                    </div>
-                    <div class="feature-item">
-                        <span class="feature-icon">◈</span>
-                        <h3 data-i18n="industrial.integration">Integration</h3>
-                        <p data-i18n="industrial.integrationCopy">Seamlessly connects with enterprise data.</p>
-                    </div>
-                </div>
-                <div class="industries-list">
-                    <span data-i18n="industrial.lifeSciences">Life Sciences</span>
-                    <span data-i18n="industrial.finance">Finance</span>
-                    <span data-i18n="industrial.legal">Legal</span>
-                    <span data-i18n="industrial.aerospace">Aerospace</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- Scientific Foundation Section -->
-        <section id="science" class="section science">
-            <div class="container">
-                <h2 class="section-title" data-i18n="science.title">Scientific Foundation</h2>
-                <div class="papers-grid">
-                    <div class="paper-card">
-                        <div class="paper-tag">Whitepaper</div>
-                        <h3>Neural Reasoning for Sure Through Constructing Explainable Models</h3>
-                        <p>Explainable model construction for deterministic reasoning in high-stakes AI.</p>
-                        <a href="https://www.researchgate.net/publication/389396704_Neural_Reasoning_for_Sure_Through_Constructing_Explainable_Models" class="btn-text" target="_blank" rel="noopener noreferrer">Read Paper →</a>
-                    </div>
-                    <div class="paper-card">
-                        <div class="paper-tag">Research</div>
-                        <h3>Sphere Neural-Networks for Rational Reasoning</h3>
-                        <p>Sphere-based neurosymbolic reasoning beyond pure statistical token prediction.</p>
-                        <a href="https://arxiv.org/abs/2403.15297" class="btn-text" target="_blank" rel="noopener noreferrer">Read Paper →</a>
-                    </div>
-                    <div class="paper-card">
-                        <div class="paper-tag">Seminar Report</div>
-                        <h3>Structure and Learning</h3>
-                        <p>Interdisciplinary agenda for integrating symbolic and neural intelligence.</p>
-                        <a href="https://drops.dagstuhl.de/opus/volltexte/2022/15767/" class="btn-text" target="_blank" rel="noopener noreferrer">Read Paper →</a>
-                    </div>
-                    <div class="paper-card">
-                        <div class="paper-tag">Monograph</div>
-                        <h3>A Geometric Approach to the Unification of Symbolic Structures and Neural Networks</h3>
-                        <p>Geometric framework bridging symbolic structures with neural computation.</p>
-                        <a href="https://link.springer.com/book/10.1007/978-3-030-56275-5" class="btn-text" target="_blank" rel="noopener noreferrer">Read Paper →</a>
-                    </div>
-                    <div class="paper-card">
-                        <div class="paper-tag">Conference Paper</div>
-                        <h3>Triple Classification Using Regions and Fine-Grained Entity Typing</h3>
-                        <p>Region-based knowledge graph reasoning with fine-grained type hierarchies.</p>
-                        <a href="https://www.researchgate.net/publication/328703147_Triple_Classification_Using_Regions_and_Fine-Grained_Entity_Typing" class="btn-text" target="_blank" rel="noopener noreferrer">Read Paper →</a>
-                    </div>
-                    <div class="paper-card">
-                        <div class="paper-tag">Conference Paper</div>
-                        <h3>Imposing Category Trees Onto Word-Embeddings Using A Geometric Construction</h3>
-                        <p>Tree-structured category injection into embedding space with zero energy loss.</p>
-                        <a href="https://www.researchgate.net/publication/331319652_Imposing_Category_Trees_Onto_Word-Embeddings_Using_A_Geometric_Construction" class="btn-text" target="_blank" rel="noopener noreferrer">Read Paper →</a>
-                    </div>
-                    <div class="paper-card">
-                        <div class="paper-tag">Applied Research</div>
-                        <h3>An Assertion Framework for Mobile Robotic Programming with Spatial Reasoning</h3>
-                        <p>Spatial logic assertions for safer mobile robotics programming and recovery.</p>
-                        <a href="https://ieeexplore.ieee.org/document/8377643" class="btn-text" target="_blank" rel="noopener noreferrer">Read Paper →</a>
-                    </div>
-                    <div class="paper-card">
-                        <div class="paper-tag">Book</div>
-                        <h3>Recognizing Variable Environment -- The Theory of Cognitive Prism</h3>
-                        <p>Cognitive model for adaptive perception and reasoning in changing environments.</p>
-                        <a href="https://link.springer.com/book/10.1007/978-3-642-24058-4" class="btn-text" target="_blank" rel="noopener noreferrer">Read Paper →</a>
-                    </div>
-                    <div class="paper-card">
-                        <div class="paper-tag">Journal Article</div>
-                        <h3>A Comment on RCC: from RCC to RCC++</h3>
-                        <p>Extended formal treatment of region connection calculus for spatial logic.</p>
-                        <a href="https://www.jstor.org/stable/41217909" class="btn-text" target="_blank" rel="noopener noreferrer">Read Paper →</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Conferences Section -->
-        <section id="conferences" class="section science">
-            <div class="container">
-                <h2 class="section-title" data-i18n="conferences.title">Conferences & Workshops</h2>
-                <div class="papers-grid conferences-grid">
-                    <div class="paper-card">
-                        <div class="paper-tag">Workshop • July 2026</div>
-                        <h3>The 2nd Workshop on Computational Humor (CHum 2026)</h3>
-                        <p>Probing the limits of symbolic, neural, and hybrid meaning representations for humor processing against the backdrop of interdisciplinary humor research.</p>
-                        <a href="https://chumweb.org/" class="btn-text" target="_blank" rel="noopener noreferrer">Event Details →</a>
-                    </div>
-                    <div class="paper-card">
-                        <div class="paper-tag">Workshop • March 2026</div>
-                        <h3>Neural Reasoning for Scientific and Mathematical Discovery</h3>
-                        <p>Exploring how neural networks can evolve to advance mathematical and scientific discovery.</p>
-                        <a href="https://neurmad.github.io/intro.html" class="btn-text" target="_blank" rel="noopener noreferrer">Event Details →</a>
-                    </div>
-                    <div class="paper-card">
-                        <div class="paper-tag">Workshop • AAAI 2026</div>
-                        <h3>Bridging Neurons and Symbols for NLP and KG Reasoning</h3>
-                        <p>Enhancing determinacy of neural networks and promoting AI's explainability, reliability, and safety.</p>
-                        <a href="https://neusymbridge.github.io/index.html" class="btn-text" target="_blank" rel="noopener noreferrer">Event Details →</a>
-                    </div>
-                    <div class="paper-card">
-                        <div class="paper-tag">Workshop • March 2025</div>
-                        <h3>Neural Reasoning and Mathematical Discovery (NEURMAD@AAAI’25)</h3>
-                        <p>An interdisciplinary two-way street commingling neural networks and mathematics.</p>
-                        <a href="https://neurmad.github.io/2025_index.html" class="btn-text" target="_blank" rel="noopener noreferrer">Event Details →</a>
-                    </div>
-                    <div class="paper-card">
-                        <div class="paper-tag">Workshop • Jan 2025</div>
-                        <h3>Bridging Neurons and Symbols for NLP and KG Reasoning (Coling 2025)</h3>
-                        <p>Exploring novel neural implementations for symbolic reasoning and enhancing neural reasoning performance.</p>
-                        <a href="https://neusymbridge.github.io/2025_index.html" class="btn-text" target="_blank" rel="noopener noreferrer">Event Details →</a>
-                    </div>
-                    <div class="paper-card">
-                        <div class="paper-tag">Workshop • Jan 2025</div>
-                        <h3>1st Workshop on Computational Humor (CHum 2025)</h3>
-                        <p>Probing the limits of symbolic, neural, and hybrid meaning representations for humor processing.</p>
-                        <a href="https://chum2025.github.io/" class="btn-text" target="_blank" rel="noopener noreferrer">Event Details →</a>
-                    </div>
-                    <div class="paper-card">
-                        <div class="paper-tag">Workshop • May 2024</div>
-                        <h3>Bridging Neurons and Symbols for NLP and KG Reasoning (LREC-COLING 2024)</h3>
-                        <p>Promoting research in neuro-symbolic integration for Natural Language Processing and Knowledge Graphs.</p>
-                        <a href="https://neusymbridge.github.io/2024_index.html" class="btn-text" target="_blank" rel="noopener noreferrer">Event Details →</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Founder Section -->
-        <section id="founder" class="section founder">
-            <div class="container">
-                <div class="founder-slider">
-                    <div class="founder-slide active">
-                        <div class="founder-content">
-                            <div class="founder-portrait">
-                                <img src="images/dr-tiansi-dong.jpg" alt="Dr. Tiansi Dong" class="founder-img">
-                            </div>
-                            <div class="founder-text">
-                                <blockquote data-i18n="founder.dongQuote">“Sphere Neural Networks bring back symbolic rigour to AI by grounding neural reasoning in set-theoretic semantics rather than vector approximations.”</blockquote>
-                                <cite data-i18n="founder.dongRole">— Dr. Tiansi Dong, President & Co-Founder</cite>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="founder-slide">
-                        <div class="founder-content">
-                            <div class="founder-portrait">
-                                <img src="images/feng-lu.jpg" alt="Feng Lu" class="founder-img">
-                            </div>
-                            <div class="founder-text">
-                                <blockquote data-i18n="founder.luQuote">“We are redefining neural reasoning. Sphere Neural Networks move AI beyond statistical prediction toward rigorous, logically grounded intelligence.”</blockquote>
-                                <cite data-i18n="founder.luRole">— Feng Lu, CEO & Co-Founder</cite>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="slider-controls">
-                    <button class="slider-dot active" data-index="0"></button>
-                    <button class="slider-dot" data-index="1"></button>
-                </div>
-            </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section id="contact" class="section contact">
-            <div class="container">
-                <h2 class="section-title" data-i18n="contact.title">Collaborate with us</h2>
-                <div class="contact-grid">
-                    <div class="contact-col">
-                        <h3 data-i18n="contact.enterprise">Enterprise</h3>
-                        <p data-i18n="contact.enterpriseCopy">Deploy Veritium in your organization.</p>
-                        <a href="mailto:enterprise@veritium.eu" class="link-hover">enterprise@veritium.eu</a>
-                    </div>
-                    <div class="contact-col">
-                        <h3 data-i18n="contact.research">Research</h3>
-                        <p data-i18n="contact.researchCopy">Join our scientific mission.</p>
-                        <a href="mailto:research@veritium.eu" class="link-hover">research@veritium.eu</a>
-                    </div>
-                    <div class="contact-col">
-                        <h3 data-i18n="contact.investors">Investors</h3>
-                        <p data-i18n="contact.investorsCopy">Shape the future of reasoning.</p>
-                        <a href="mailto:invest@veritium.eu" class="link-hover">invest@veritium.eu</a>
+                        <a href="legal.html" class="btn btn-secondary" data-i18n="footer.legal">Legal</a>
+                        <a href="data-protection.html" class="btn btn-secondary" data-i18n="footer.privacy">Data Protection</a>
                     </div>
                 </div>
             </div>
         </section>
     </main>
+
     <footer class="footer">
         <div class="footer-content">
             <span class="copyright" data-i18n="footer.rights">&copy; 2026 veritium GmbH. All rights reserved.</span>
@@ -371,14 +75,6 @@
         </div>
     </footer>
 
-    <!-- Back to Top Button -->
-    <button id="back-to-top" class="back-to-top" aria-label="Back to Top">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M18 15l-6-6-6 6"/>
-        </svg>
-    </button>
-
-    <!-- Scripts -->
     <script type="module" src="js/main.js"></script>
 </body>
 </html>
