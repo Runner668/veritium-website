@@ -1274,6 +1274,67 @@ a {
     font-size: 1.15rem;
 }
 
+.project-notices {
+    margin: 0 0 2.5rem;
+    padding: 1.5rem;
+    border-left: 2px solid var(--color-muted-gold);
+    background: rgba(15, 15, 18, 0.42);
+}
+
+.project-notices .document-eyebrow {
+    margin-bottom: 0.65rem;
+}
+
+.project-notices h2 {
+    margin-bottom: 0.65rem;
+}
+
+.project-notices > p:not(.document-eyebrow) {
+    max-width: 44rem;
+    margin-bottom: 1.25rem;
+}
+
+.project-notice-list {
+    display: grid;
+    gap: 0.6rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.project-notice-list li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.9rem 0;
+    border-top: 1px solid rgba(222, 213, 192, 0.14);
+}
+
+.project-notice-list li > div {
+    display: grid;
+    gap: 0.2rem;
+}
+
+.project-notice-list strong {
+    color: var(--color-text-primary);
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    font-weight: 400;
+}
+
+.project-notice-list li span:not([aria-hidden]) {
+    color: var(--color-text-secondary);
+    font-size: 0.82rem;
+}
+
+.project-notice-list a {
+    flex: 0 0 auto;
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
 .document-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1356,6 +1417,11 @@ a {
 
     .document-grid {
         grid-template-columns: 1fr;
+    }
+
+    .project-notice-list li {
+        align-items: flex-start;
+        flex-direction: column;
     }
 
     .document-footer {
