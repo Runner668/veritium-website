@@ -1,6 +1,6 @@
 /**
- * First-screen animation only. The homepage intentionally contains no
- * scroll-driven content beyond the hero, so there are no section triggers.
+ * First-screen animation only. The homepage stays locked to one viewport;
+ * the mouse wheel controls the particle field's cloud-to-sphere progress.
  */
 export function initAnimations(threeScene, options = {}) {
     const onIntroComplete = typeof options.onIntroComplete === 'function'
@@ -40,23 +40,34 @@ export function initAnimations(threeScene, options = {}) {
             ease: 'power4.out'
         }, 0);
 
-    // Keep the particle field responsive to page scrolling. This deliberately
-    // uses the document's actual scroll range, so it also works if more
-    // homepage sections are added later without requiring hidden triggers.
-    let scrollFramePending = false;
-    const updateScrollState = () => {
-        scrollFramePending = false;
-        const scrollRange = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
-        const progress = scrollRange > 0 ? window.scrollY / scrollRange : 0;
-        if (threeScene.setMorphProgress) threeScene.setMorphProgress(progress);
-    };
-    const requestScrollStateUpdate = () => {
-        if (scrollFramePending) return;
-        scrollFramePending = true;
-        window.requestAnimationFrame(updateScrollState);
+    let targetProgress = 0;
+    let displayedProgress = 0;
+    let animationFrame = null;
+
+    const animateMorph = () => {
+        displayedProgress += (targetProgress - displayedProgress) * 0.09;
+        if (threeScene.setMorphProgress) threeScene.setMorphProgress(displayedProgress);
+
+        if (Math.abs(targetProgress - displayedProgress) > 0.001) {
+            animationFrame = window.requestAnimationFrame(animateMorph);
+        } else {
+            displayedProgress = targetProgress;
+            animationFrame = null;
+        }
     };
 
-    window.addEventListener('scroll', requestScrollStateUpdate, { passive: true });
-    window.addEventListener('resize', requestScrollStateUpdate, { passive: true });
-    updateScrollState();
+    const onWheel = (event) => {
+        // The homepage has no scrollable content: use the wheel as the
+        // interaction while preventing the browser's native page movement.
+        if (event.ctrlKey) return;
+        event.preventDefault();
+
+        const unit = event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? window.innerHeight : 1;
+        const delta = event.deltaY * unit;
+        targetProgress = Math.max(0, Math.min(1, targetProgress + delta * 0.0012));
+
+        if (animationFrame === null) animationFrame = window.requestAnimationFrame(animateMorph);
+    };
+
+    window.addEventListener('wheel', onWheel, { passive: false });
 }

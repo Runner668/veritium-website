@@ -43,6 +43,10 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
+body.homepage {
+    overflow: hidden;
+}
+
 /* Film Grain Overlay */
 body::after {
     content: "";
