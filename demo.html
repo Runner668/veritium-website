@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Probability Cloud to Sphere Demo</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            background-color: #0F0F12;
+            color: #F2E9DA;
+        }
+        #canvas-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+        }
+        .scroll-space {
+            height: 300vh; /* Make it scrollable */
+            position: relative;
+        }
+        .content {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            pointer-events: none;
+            width: 100%;
+        }
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 1;
+            transition: opacity 0.5s;
+        }
+        p {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.2rem;
+            color: #C6A95E;
+        }
+        .scroll-indicator {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            color: rgba(242, 233, 218, 0.5);
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateX(-50%) translateY(0);}
+            40% {transform: translateX(-50%) translateY(-10px);}
+            60% {transform: translateX(-50%) translateY(-5px);}
+        }
+    </style>
+    <!-- Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+</head>
+<body>
+
+    <div id="canvas-container"></div>
+
+    <div class="scroll-space">
+        <div class="content">
+            <h1 id="title-text">Probability Cloud</h1>
+            <p>Scroll to collapse the wave function</p>
+        </div>
+    </div>
+
+    <div class="scroll-indicator">Scroll Down</div>
+
+    <script type="module">
+        import { DemoScene } from './js/demoScene.js';
+
+        // 1. Smooth Scroll
+        const lenis = new Lenis();
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        // 2. Scene
+        const scene = new DemoScene('canvas-container');
+
+        // 3. Scroll Interaction
+        gsap.registerPlugin(ScrollTrigger);
+
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: ".scroll-space",
+                start: "top top",
+                end: "bottom bottom",
+                scrub: 1,
+                onUpdate: (self) => {
+                    // Pass progress to scene
+                    scene.setMorphProgress(self.progress);
+                    
+                    // Update Text
+                    const title = document.getElementById('title-text');
+                    if (self.progress > 0.8) {
+                        title.textContent = "Verified Sphere";
+                        title.style.color = "#C6A95E";
+                    } else {
+                        title.textContent = "Probability Cloud";
+                        title.style.color = "#F2E9DA";
+                    }
+                    
+                    // Fade out text in middle
+                    if (self.progress > 0.2 && self.progress < 0.8) {
+                        title.style.opacity = 0.2;
+                    } else {
+                        title.style.opacity = 1;
+                    }
+                }
+            }
+        });
+
+    </script>
+</body>
+</html>
