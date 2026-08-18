@@ -43,6 +43,8 @@ export function initAnimations(threeScene, options = {}) {
     let targetProgress = 0;
     let displayedProgress = 0;
     let animationFrame = null;
+    // Reduce wheel sensitivity so the first-screen morph unfolds more slowly.
+    const wheelProgressScale = 0.0006;
 
     const animateMorph = () => {
         displayedProgress += (targetProgress - displayedProgress) * 0.09;
@@ -64,7 +66,7 @@ export function initAnimations(threeScene, options = {}) {
 
         const unit = event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? window.innerHeight : 1;
         const delta = event.deltaY * unit;
-        targetProgress = Math.max(0, Math.min(1, targetProgress + delta * 0.0012));
+        targetProgress = Math.max(0, Math.min(1, targetProgress + delta * wheelProgressScale));
 
         if (animationFrame === null) animationFrame = window.requestAnimationFrame(animateMorph);
     };
