@@ -1097,6 +1097,13 @@ a {
         font-size: 2.5rem; /* Smaller section titles */
     }
 
+    /* Lift the hero copy by ~15% of the viewport so it sits closer to the
+       top of the screen on phones, matching the desktop hero placement. */
+    .section.hero {
+        align-items: flex-start;
+        padding-top: 15vh;
+    }
+
     .hero-title {
         font-size: 3rem;
     }
@@ -1187,7 +1194,9 @@ a {
     .hero-title {
         font-size: 2.5rem;
         margin-bottom: 1rem;
-        margin-top: 7rem;
+        /* Section hero already has 15vh of padding-top above this point;
+           keep a small additional buffer so the headline clears the nav. */
+        margin-top: 1.5rem;
     }
     .hero-subtitle {
         font-size: 0.85rem;

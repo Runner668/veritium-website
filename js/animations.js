@@ -43,8 +43,14 @@ export function initAnimations(threeScene, options = {}) {
     let targetProgress = 0;
     let displayedProgress = 0;
     let animationFrame = null;
-    // Reduce wheel sensitivity so the first-screen morph unfolds more slowly.
-    const wheelProgressScale = 0.0006;
+    // Slow the first-screen morph another 50% on top of the previous
+    // reduction so the cloud-to-sphere transition unfolds even more gently.
+    const wheelProgressScale = 0.0003;
+    // Touch swipes use a slightly higher scale because mobile deltaY values
+    // tend to be larger than the per-tick deltas a mouse wheel reports.
+    const touchProgressScale = 0.0015;
+    let activeTouchId = null;
+    let lastTouchY = null;
 
     const animateMorph = () => {
         displayedProgress += (targetProgress - displayedProgress) * 0.09;
@@ -71,5 +77,46 @@ export function initAnimations(threeScene, options = {}) {
         if (animationFrame === null) animationFrame = window.requestAnimationFrame(animateMorph);
     };
 
+    const onTouchStart = (event) => {
+        if (event.touches.length !== 1) return;
+        const touch = event.touches[0];
+        activeTouchId = touch.identifier;
+        lastTouchY = touch.clientY;
+    };
+
+    const onTouchMove = (event) => {
+        if (activeTouchId === null) return;
+        const touch = Array.from(event.touches).find((t) => t.identifier === activeTouchId);
+        if (!touch) {
+            activeTouchId = null;
+            lastTouchY = null;
+            return;
+        }
+        if (lastTouchY === null) {
+            lastTouchY = touch.clientY;
+            return;
+        }
+        // Match the wheel direction convention: scrolling down advances the morph.
+        const delta = lastTouchY - touch.clientY;
+        lastTouchY = touch.clientY;
+        targetProgress = Math.max(0, Math.min(1, targetProgress + delta * touchProgressScale));
+        if (animationFrame === null) animationFrame = window.requestAnimationFrame(animateMorph);
+    };
+
+    const onTouchEnd = (event) => {
+        const remaining = Array.from(event.touches || []).some((t) => t.identifier === activeTouchId);
+        if (!remaining) {
+            activeTouchId = null;
+            lastTouchY = null;
+        } else {
+            const touch = Array.from(event.touches).find((t) => t.identifier === activeTouchId);
+            lastTouchY = touch ? touch.clientY : null;
+        }
+    };
+
     window.addEventListener('wheel', onWheel, { passive: false });
+    window.addEventListener('touchstart', onTouchStart, { passive: true });
+    window.addEventListener('touchmove', onTouchMove, { passive: true });
+    window.addEventListener('touchend', onTouchEnd, { passive: true });
+    window.addEventListener('touchcancel', onTouchEnd, { passive: true });
 }
