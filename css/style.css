@@ -1193,7 +1193,7 @@ a {
 @media (max-width: 480px) {
     .hero-title {
         font-size: 2.5rem;
-        margin-bottom: 1rem;
+        margin-bottom: 3.5rem;
         /* Section hero already has 15vh of padding-top above this point;
            keep a small additional buffer so the headline clears the nav. */
         margin-top: 1.5rem;
