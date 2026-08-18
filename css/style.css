@@ -1,3 +1,27 @@
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 300 600;
+    font-display: swap;
+    src: url('../assets/fonts/inter-latin.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Playfair Display';
+    font-style: normal;
+    font-weight: 400 600;
+    font-display: swap;
+    src: url('../assets/fonts/playfair-display-latin.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Playfair Display';
+    font-style: italic;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../assets/fonts/playfair-display-latin-italic.woff2') format('woff2');
+}
+
 :root {
     /* Color Tokens */
     --color-charcoal: #0F0F12;
@@ -135,8 +159,7 @@ a {
     align-items: center;
     padding: 1.2rem 5%;
     z-index: 100;
-    background: linear-gradient(180deg, rgba(16, 16, 22, 0.88) 0%, rgba(16, 16, 22, 0.48) 58%, rgba(16, 16, 22, 0) 100%);
-    backdrop-filter: blur(8px);
+    background: rgba(16, 16, 22, 0.3);
     transition: padding 0.6s ease;
 }
 
@@ -638,9 +661,9 @@ a {
     padding: 1rem 2rem;
     font-size: 0.8rem;
     color: var(--color-text-secondary);
-    background: linear-gradient(0deg, rgba(16, 16, 22, 0.88) 0%, rgba(16, 16, 22, 0.48) 58%, rgba(16, 16, 22, 0) 100%);
+    background: rgba(16, 16, 22, 0.1);
     z-index: 1;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(2px);
     pointer-events: none; /* Let clicks pass through background */
 }
 
@@ -1190,9 +1213,7 @@ a {
 
 .document-header,
 .document-footer {
-    width: 100%;
-    padding-right: 5%;
-    padding-left: 5%;
+    width: min(90%, var(--container-width));
     margin: 0 auto;
     display: flex;
     align-items: center;
@@ -1201,8 +1222,6 @@ a {
 
 .document-header {
     min-height: 7rem;
-    background: linear-gradient(180deg, rgba(16, 16, 22, 0.88) 0%, rgba(16, 16, 22, 0.48) 58%, rgba(16, 16, 22, 0) 100%);
-    backdrop-filter: blur(8px);
     border-bottom: 1px solid rgba(222, 213, 192, 0.16);
 }
 
@@ -1270,10 +1289,13 @@ a {
 
 .legal-document h1 {
     margin-bottom: 1.2rem;
+    max-width: 100%;
     font-family: var(--font-serif);
     font-size: clamp(3rem, 8vw, 6rem);
     font-weight: 400;
     line-height: 0.98;
+    overflow-wrap: anywhere;
+    hyphens: auto;
 }
 
 .document-lead {
@@ -1357,8 +1379,17 @@ a {
     background: rgba(15, 15, 18, 0.58);
 }
 
-.legal-document section + section {
-    margin-top: 2.25rem;
+.document-grid section + section {
+    margin-top: 0;
+}
+
+.document-grid section:last-child {
+    display: block;
+    grid-column: 1 / -1;
+}
+
+.document-grid section:last-child h2 {
+    margin-bottom: 0;
 }
 
 .legal-document h2 {
@@ -1392,9 +1423,7 @@ a {
 }
 
 .document-footer {
-    padding: 1.3rem 5% 2rem;
-    background: linear-gradient(0deg, rgba(16, 16, 22, 0.88) 0%, rgba(16, 16, 22, 0.48) 58%, rgba(16, 16, 22, 0) 100%);
-    backdrop-filter: blur(8px);
+    padding: 1.3rem 0 2rem;
     border-top: 1px solid rgba(222, 213, 192, 0.16);
     color: var(--color-text-secondary);
     font-size: 0.8rem;
@@ -1407,6 +1436,12 @@ a {
 
 .document-footer a:hover {
     color: var(--color-muted-gold);
+}
+
+@media (min-width: 641px) {
+    .document-grid section:last-child h2 {
+        white-space: nowrap;
+    }
 }
 
 @media (max-width: 640px) {
@@ -1428,6 +1463,16 @@ a {
 
     .document-grid {
         grid-template-columns: 1fr;
+    }
+
+    .document-grid section:last-child {
+        display: block;
+        grid-column: auto;
+    }
+
+    .document-grid section:last-child h2 {
+        margin-bottom: 0;
+        white-space: normal;
     }
 
     .project-notice-list li {
@@ -1454,9 +1499,9 @@ a {
     bottom: clamp(1rem, 3vw, 2rem);
     z-index: 1200;
     display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    gap: 1.75rem;
-    width: min(50rem, calc(100vw - 2rem));
+    grid-template-columns: minmax(16rem, 1fr) auto;
+    gap: 2rem;
+    width: min(60rem, calc(100vw - 2rem));
     padding: 1.35rem 1.5rem 1.4rem;
     border: 1px solid rgba(198, 169, 94, 0.62);
     border-radius: 0.2rem;
@@ -1464,6 +1509,10 @@ a {
     box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.42);
     backdrop-filter: blur(16px);
     animation: cookieConsentIn 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.cookie-consent-copy {
+    min-width: 0;
 }
 
 @keyframes cookieConsentIn {
@@ -1534,6 +1583,7 @@ a {
     font-size: 0.72rem;
     letter-spacing: 0.06em;
     text-transform: uppercase;
+    white-space: nowrap;
     transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
 }
 
@@ -1671,14 +1721,18 @@ a {
     flex: 0 0 auto;
     width: 2.8rem;
     height: 1.55rem;
-    opacity: 0.62;
+    cursor: pointer;
 }
 
 .cookie-toggle input {
     position: absolute;
-    width: 1px;
-    height: 1px;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
     opacity: 0;
+    cursor: pointer;
+    z-index: 1;
 }
 
 .cookie-toggle-track {
@@ -1687,6 +1741,8 @@ a {
     border: 1px solid rgba(222, 213, 192, 0.35);
     border-radius: 999px;
     background: rgba(15, 15, 18, 0.55);
+    pointer-events: none;
+    transition: background-color 180ms ease, border-color 180ms ease;
 }
 
 .cookie-toggle-track::after {
@@ -1698,6 +1754,30 @@ a {
     height: 0.95rem;
     border-radius: 50%;
     background: var(--color-text-secondary);
+    transition: transform 180ms ease, background-color 180ms ease;
+}
+
+.cookie-toggle input:checked + .cookie-toggle-track {
+    border-color: var(--color-muted-gold);
+    background: rgba(198, 169, 94, 0.32);
+}
+
+.cookie-toggle input:checked + .cookie-toggle-track::after {
+    transform: translateX(1.16rem);
+    background: var(--color-muted-gold);
+}
+
+.cookie-toggle input:disabled {
+    cursor: not-allowed;
+}
+
+.cookie-toggle input:disabled + .cookie-toggle-track {
+    opacity: 0.62;
+}
+
+.cookie-toggle input:focus-visible + .cookie-toggle-track {
+    outline: 2px solid var(--color-muted-gold);
+    outline-offset: 3px;
 }
 
 .cookie-settings-actions {
@@ -1722,7 +1802,7 @@ a {
     border: 0;
 }
 
-@media (max-width: 760px) {
+@media (max-width: 980px) {
     .cookie-consent-banner {
         grid-template-columns: 1fr;
         gap: 1rem;
@@ -1733,7 +1813,7 @@ a {
     }
 
     .cookie-consent-actions {
-        justify-content: flex-start;
+        justify-content: flex-end;
         min-width: 0;
     }
 

@@ -2,9 +2,9 @@
     const storageKey = 'veritium_cookie_consent_v1';
     const language = document.documentElement.lang === 'en' ? 'en' : 'de';
     const privacyHref = 'data-protection.html';
-    // Add the GA4 Measurement ID once analytics is ready, for example:
-    // window.VERITIUM_GA_MEASUREMENT_ID = 'G-XXXXXXXXXX';
-    const measurementId = window.VERITIUM_GA_MEASUREMENT_ID || '';
+    const measurementId = typeof window.VERITIUM_GA_MEASUREMENT_ID === 'string'
+        ? window.VERITIUM_GA_MEASUREMENT_ID.trim()
+        : '';
     const copy = {
         de: {
             title: 'Datenschutz-Einstellungen',
@@ -46,8 +46,8 @@
 
     if (measurementId) {
         copy.optionalText = language === 'de'
-            ? 'Wird nur nach ausdrücklicher Zustimmung geladen. Es werden keine Werbefunktionen aktiviert.'
-            : 'Loaded only after explicit consent. Advertising features are not enabled.';
+            ? 'Google Analytics 4 wird nur nach ausdrücklicher Zustimmung geladen. Werbefunktionen bleiben deaktiviert.'
+            : 'Google Analytics 4 is loaded only after explicit consent. Advertising features remain disabled.';
     }
 
     const readConsent = () => {
@@ -82,6 +82,11 @@
         });
     };
 
+    const unloadGoogleAnalytics = () => {
+        const script = document.querySelector('script[data-veritium-google-analytics]');
+        if (script) script.remove();
+    };
+
     const updateGoogleConsent = (analyticsGranted) => {
         if (typeof window.gtag === 'function') {
             window.gtag('consent', 'update', {
@@ -91,7 +96,10 @@
                 ad_personalization: 'denied'
             });
         }
-        if (!analyticsGranted) clearAnalyticsCookies();
+        if (!analyticsGranted) {
+            clearAnalyticsCookies();
+            unloadGoogleAnalytics();
+        }
     };
 
     const loadGoogleAnalytics = () => {
@@ -102,6 +110,12 @@
             window.dataLayer.push(arguments);
         };
         window.gtag('consent', 'default', {
+            analytics_storage: 'denied',
+            ad_storage: 'denied',
+            ad_user_data: 'denied',
+            ad_personalization: 'denied'
+        });
+        window.gtag('consent', 'update', {
             analytics_storage: 'granted',
             ad_storage: 'denied',
             ad_user_data: 'denied',
@@ -154,6 +168,11 @@
 
     const openModal = () => {
         if (!modal) return;
+        const analyticsCheckbox = modal.querySelector('#cookie-analytics');
+        const consent = readConsent();
+        if (analyticsCheckbox) {
+            analyticsCheckbox.checked = Boolean(consent && consent.analytics && measurementId);
+        }
         lastFocusedElement = document.activeElement;
         hideBanner();
         modal.hidden = false;
@@ -186,7 +205,7 @@
         banner.setAttribute('aria-labelledby', 'cookie-consent-title');
         banner.innerHTML = `
             <div class="cookie-consent-copy">
-                <p class="cookie-consent-eyebrow">veritium · privacy</p>
+                <p class="cookie-consent-eyebrow">Veritium · privacy</p>
                 <h2 id="cookie-consent-title">${copy.title}</h2>
                 <p>${copy.bannerText} <a href="${privacyHref}">${copy.privacy}</a>.</p>
             </div>
@@ -214,7 +233,7 @@
             <div class="cookie-settings-backdrop" data-cookie-close="true"></div>
             <div class="cookie-settings-dialog" role="document">
                 <button type="button" class="cookie-consent-close" aria-label="${copy.close}">&times;</button>
-                <p class="cookie-consent-eyebrow">veritium · privacy</p>
+                <p class="cookie-consent-eyebrow">Veritium · privacy</p>
                 <h2 id="cookie-settings-title">${copy.title}</h2>
                 <p class="cookie-settings-intro">${copy.modalIntro}</p>
                 <div class="cookie-category cookie-category--required">
@@ -230,7 +249,7 @@
                         <p>${copy.optionalText}</p>
                     </div>
                     <label class="cookie-toggle">
-                        <input type="checkbox" id="cookie-analytics" ${measurementId ? '' : 'disabled'}>
+                        <input type="checkbox" id="cookie-analytics" aria-label="${copy.optional}" ${measurementId ? '' : 'disabled'}>
                         <span class="cookie-toggle-track" aria-hidden="true"></span>
                         <span class="sr-only">${copy.notActive}</span>
                     </label>

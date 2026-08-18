@@ -1,2 +1,2 @@
-// Set this once Google Analytics is ready, for example: 'G-XXXXXXXXXX'.
-window.VERITIUM_GA_MEASUREMENT_ID = '';
+// GA4 is loaded by the consent manager only after explicit analytics consent.
+window.VERITIUM_GA_MEASUREMENT_ID = 'G-KG78HPXB1V';
