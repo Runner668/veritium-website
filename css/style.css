@@ -71,6 +71,12 @@ body.homepage {
     overflow: hidden;
 }
 
+/* Leave breathing room before the fixed footer when the long-form sections
+   are scrolled to their end. */
+body.homepage-page main {
+    padding-bottom: 10rem;
+}
+
 /* Film Grain Overlay */
 body::after {
     content: "";
@@ -325,6 +331,12 @@ a {
 /* Hero */
 .hero-content {
     /* max-width: 1000px; */
+}
+
+/* Anchor absolutely-positioned children (e.g. the scroll indicator) to the
+   hero container, matching the layout used on develop. */
+.section.hero .container {
+    position: relative;
 }
 
 .hero-title {
@@ -1083,6 +1095,10 @@ a {
     :root {
         --spacing-lg: 2.5rem;
         --spacing-xl: 6rem; /* Reduce large spacing on mobile */
+    }
+
+    body.homepage-page main {
+        padding-bottom: 12rem;
     }
 
     .nav {

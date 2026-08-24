@@ -232,6 +232,8 @@ export class DemoScene {
         
         this.scene = null;
         this.camera = null;
+        this.sphereCamera = null;
+        this.activeCamera = null;
         this.renderer = null;
         this.mainGroup = null;
         this.coreMesh = null;
@@ -243,6 +245,8 @@ export class DemoScene {
         this.mouse = new THREE.Vector2();
         
         this.morphProgress = 0; // 0 = Cloud, 1 = Sphere
+        this.scrollProgress = 0;
+        this.targetScrollProgress = 0;
         
         this.init();
     }
@@ -254,6 +258,8 @@ export class DemoScene {
 
         this.camera = new THREE.PerspectiveCamera(45, this.width / this.height, 0.5, 40);
         this.camera.position.z = 8;
+        this.sphereCamera = this.createSphereCamera();
+        this.activeCamera = this.camera;
 
         this.renderer = new THREE.WebGLRenderer({ 
             alpha: true, 
@@ -274,6 +280,33 @@ export class DemoScene {
         window.addEventListener('mousemove', this.onMouseMove.bind(this));
 
         this.animate();
+    }
+
+    createSphereCamera() {
+        const visibleHeight = 2 * Math.tan((this.camera.fov * Math.PI) / 360) * this.camera.position.z;
+        const visibleWidth = visibleHeight * this.camera.aspect;
+        const camera = new THREE.OrthographicCamera(
+            -visibleWidth / 2,
+            visibleWidth / 2,
+            visibleHeight / 2,
+            -visibleHeight / 2,
+            0.5,
+            40
+        );
+        camera.position.copy(this.camera.position);
+        return camera;
+    }
+
+    updateSphereCamera() {
+        if (!this.sphereCamera) return;
+        const visibleHeight = 2 * Math.tan((this.camera.fov * Math.PI) / 360) * this.camera.position.z;
+        const visibleWidth = visibleHeight * this.camera.aspect;
+        this.sphereCamera.left = -visibleWidth / 2;
+        this.sphereCamera.right = visibleWidth / 2;
+        this.sphereCamera.top = visibleHeight / 2;
+        this.sphereCamera.bottom = -visibleHeight / 2;
+        this.sphereCamera.position.copy(this.camera.position);
+        this.sphereCamera.updateProjectionMatrix();
     }
 
     createObjects() {
@@ -406,6 +439,9 @@ export class DemoScene {
 
     setMorphProgress(progress) {
         this.morphProgress = Math.max(0, Math.min(1, progress));
+        if (this.sphereCamera) {
+            this.activeCamera = this.morphProgress >= 1 ? this.sphereCamera : this.camera;
+        }
         
         // Update Uniform
         if (this.material) {
@@ -431,12 +467,43 @@ export class DemoScene {
         }
     }
 
+    setScrollProgress(progress) {
+        this.targetScrollProgress = Math.max(0, Math.min(1, progress));
+
+        // The sphere should remain a true sphere while it travels. The intro
+        // timeline may still be finishing when a direct link is used, so only
+        // normalize the group once the morph itself is complete.
+        if (this.targetScrollProgress > 0 && this.morphProgress >= 1 && this.mainGroup) {
+            this.mainGroup.scale.setScalar(1);
+        }
+    }
+
+    getScrollTargetPosition() {
+        const visibleHeight = 2 * Math.tan((this.camera.fov * Math.PI) / 360) * this.camera.position.z;
+        const visibleWidth = visibleHeight * this.camera.aspect;
+        const sphereRadius = 1.6;
+        const footerPixels = Math.max(52, Math.min(96, this.height * 0.09));
+        const footerWorldHeight = (footerPixels / this.height) * visibleHeight;
+        const visibleSphereArea = 0.4;
+        // A circular segment with its cut line 0.16 radii from the centre
+        // contains approximately 40% of the sphere's projected area.
+        const cutOffsetRatio = 0.16 * (visibleSphereArea / 0.4);
+
+        return {
+            // Move the sphere centre just beyond the right edge so only the
+            // requested 40% segment remains visible.
+            x: visibleWidth / 2 + sphereRadius * cutOffsetRatio,
+            y: -visibleHeight / 2 + footerWorldHeight + sphereRadius + 0.12
+        };
+    }
+
     onResize() {
         this.width = window.innerWidth;
         this.height = window.innerHeight;
         this.camera.aspect = this.width / this.height;
         this.camera.updateProjectionMatrix();
         this.renderer.setSize(this.width, this.height);
+        this.updateSphereCamera();
         
         if (this.material) {
             this.material.uniforms.uPixelRatio.value = Math.min(window.devicePixelRatio, 2);
@@ -460,6 +527,14 @@ export class DemoScene {
         if (this.material) {
             this.material.uniforms.uTime.value = time;
         }
+
+        this.scrollProgress += (this.targetScrollProgress - this.scrollProgress) * 0.06;
+        if (this.mainGroup) {
+            const easedProgress = this.scrollProgress * this.scrollProgress * (3 - 2 * this.scrollProgress);
+            const targetPosition = this.getScrollTargetPosition();
+            this.mainGroup.position.x = targetPosition.x * easedProgress;
+            this.mainGroup.position.y = targetPosition.y * easedProgress;
+        }
         
         // Rotate the whole system slowly for cinematic feel
         // Rotate faster when in cloud mode, slower/locked when in sphere mode
@@ -472,6 +547,6 @@ export class DemoScene {
         const parallaxX = (this.mouse.y * 0.05 - this.mainGroup.rotation.x) * 0.05;
         // this.mainGroup.rotation.x += parallaxX; // Optional tilt
 
-        this.renderer.render(this.scene, this.camera);
+        this.renderer.render(this.scene, this.activeCamera);
     }
 }

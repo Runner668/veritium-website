@@ -1,10 +1,15 @@
 /**
- * First-screen animation only. The homepage stays locked to one viewport;
- * the mouse wheel controls the particle field's cloud-to-sphere progress.
+ * First-screen animation only. While the homepage is locked to one viewport,
+ * the mouse wheel and touch swipe control the particle field's cloud-to-sphere
+ * progress. Completing the sphere or clicking a section link unlocks native
+ * page scrolling.
  */
 export function initAnimations(threeScene, options = {}) {
     const onIntroComplete = typeof options.onIntroComplete === 'function'
         ? options.onIntroComplete
+        : null;
+    const onSphereComplete = typeof options.onSphereComplete === 'function'
+        ? options.onSphereComplete
         : null;
 
     if (threeScene.setMorphProgress) {
@@ -16,7 +21,11 @@ export function initAnimations(threeScene, options = {}) {
 
     if (typeof gsap === 'undefined' || !threeScene.mainGroup) {
         if (onIntroComplete) onIntroComplete();
-        return;
+        return {
+            animateToSphere: (onComplete) => {
+                if (typeof onComplete === 'function') onComplete();
+            }
+        };
     }
 
     const timeline = gsap.timeline({
@@ -51,6 +60,7 @@ export function initAnimations(threeScene, options = {}) {
     const touchProgressScale = 0.0015;
     let activeTouchId = null;
     let lastTouchY = null;
+    let pendingSphereCompletion = null;
 
     const animateMorph = () => {
         displayedProgress += (targetProgress - displayedProgress) * 0.09;
@@ -61,23 +71,59 @@ export function initAnimations(threeScene, options = {}) {
         } else {
             displayedProgress = targetProgress;
             animationFrame = null;
+
+            if (pendingSphereCompletion && displayedProgress >= 1) {
+                const onComplete = pendingSphereCompletion;
+                pendingSphereCompletion = null;
+                onComplete();
+            }
         }
     };
 
+    const animateToSphere = (onComplete) => {
+        pendingSphereCompletion = typeof onComplete === 'function' ? onComplete : null;
+        targetProgress = 1;
+
+        if (displayedProgress >= 1) {
+            const complete = pendingSphereCompletion;
+            pendingSphereCompletion = null;
+            if (complete) complete();
+            return;
+        }
+
+        if (animationFrame === null) animationFrame = window.requestAnimationFrame(animateMorph);
+    };
+
     const onWheel = (event) => {
-        // The homepage has no scrollable content: use the wheel as the
-        // interaction while preventing the browser's native page movement.
+        // Once the user has entered the page content, native scrolling takes
+        // over and this listener becomes a no-op.
+        if (!document.body.classList.contains('homepage')) return;
         if (event.ctrlKey) return;
-        event.preventDefault();
 
         const unit = event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? window.innerHeight : 1;
         const delta = event.deltaY * unit;
+
+        // The first downward gesture after the sphere is complete hands
+        // control back to the browser so the page can begin scrolling.
+        if (delta > 0 && targetProgress >= 1) {
+            pendingSphereCompletion = null;
+            if (onSphereComplete) onSphereComplete();
+            // Apply this same wheel delta immediately; otherwise the browser
+            // has already decided not to scroll while the homepage was locked.
+            event.preventDefault();
+            window.scrollBy(0, delta);
+            return;
+        }
+
+        event.preventDefault();
+
         targetProgress = Math.max(0, Math.min(1, targetProgress + delta * wheelProgressScale));
 
         if (animationFrame === null) animationFrame = window.requestAnimationFrame(animateMorph);
     };
 
     const onTouchStart = (event) => {
+        if (!document.body.classList.contains('homepage')) return;
         if (event.touches.length !== 1) return;
         const touch = event.touches[0];
         activeTouchId = touch.identifier;
@@ -85,6 +131,11 @@ export function initAnimations(threeScene, options = {}) {
     };
 
     const onTouchMove = (event) => {
+        if (!document.body.classList.contains('homepage')) {
+            activeTouchId = null;
+            lastTouchY = null;
+            return;
+        }
         if (activeTouchId === null) return;
         const touch = Array.from(event.touches).find((t) => t.identifier === activeTouchId);
         if (!touch) {
@@ -99,6 +150,15 @@ export function initAnimations(threeScene, options = {}) {
         // Match the wheel direction convention: scrolling down advances the morph.
         const delta = lastTouchY - touch.clientY;
         lastTouchY = touch.clientY;
+
+        if (delta > 0 && targetProgress >= 1) {
+            activeTouchId = null;
+            lastTouchY = null;
+            pendingSphereCompletion = null;
+            if (onSphereComplete) onSphereComplete();
+            return;
+        }
+
         targetProgress = Math.max(0, Math.min(1, targetProgress + delta * touchProgressScale));
         if (animationFrame === null) animationFrame = window.requestAnimationFrame(animateMorph);
     };
@@ -119,4 +179,6 @@ export function initAnimations(threeScene, options = {}) {
     window.addEventListener('touchmove', onTouchMove, { passive: true });
     window.addEventListener('touchend', onTouchEnd, { passive: true });
     window.addEventListener('touchcancel', onTouchEnd, { passive: true });
+
+    return { animateToSphere };
 }
