@@ -1,4 +1,4 @@
-import { DemoScene } from './demoScene.js';
+import { DemoScene } from './scene.js';
 import { initAnimations } from './animations.js';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    const sectionLinks = document.querySelectorAll('a[href^="#science"], a[href^="#conferences"]');
+    const sectionLinks = document.querySelectorAll('a[href^="#science"], a[href^="#conferences"], a[href^="#contact"]');
     sectionLinks.forEach((link) => {
         link.addEventListener('click', (event) => {
             const target = document.querySelector(link.getAttribute('href'));
